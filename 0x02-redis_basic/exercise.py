@@ -29,7 +29,7 @@ class Cache:
         return key
 
     def get(
-            self, key: str, fn: Callable = None
+            self, key: str, fn: Optional[Callable] = None
             ) -> Union[str, bytes, int, float]:
         """
         Retrieve data from Redis and apply an optional conversion function.
@@ -37,13 +37,13 @@ class Cache:
         data = self._redis.get(key)
         return fn(data) if fn is not None else data
 
-    def get_str(self, key: str) -> str:
+    def get_str(self, key: str) -> Optional[str]:
         """
         Retrieve data from Redis and decode it as a UTF-8 string.
         """
         return self.get(key, lambda d: d.decode('utf-8'))
 
-    def get_int(self, key: str) -> int:
+    def get_int(self, key: str) -> Optional[int]:
         """
         Retrieve data from Redis and convert it to an integer.
         """
