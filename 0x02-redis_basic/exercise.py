@@ -47,4 +47,4 @@ class Cache:
         """
         Retrieve data from Redis and convert it to an integer.
         """
-        return self.get(key, int)
+        return self.get(key, lambda x: int(x))
